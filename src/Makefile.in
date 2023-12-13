@@ -106,27 +106,27 @@ install: $(TARGETS)
 	   $(INSTALL) $$target $(DESTDIR)${INSTALL_BININSTALL} ;\
 	done
 	@echo "Installing links to third-party synthesis flow tool executables"
-	@if test "${HAVE_GRAYWOLF}" = "1"; then \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f graywolf;  ln -s $(QFLOW_GRAYWOLF_PATH) graywolf) ;\
-	fi
+	# @if test "${HAVE_GRAYWOLF}" = "1"; then \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f graywolf;  ln -s $(QFLOW_GRAYWOLF_PATH) graywolf) ;\
+	# fi
 	@if test "${HAVE_REPLACE}" = "1"; then \
 	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f RePlAce;  ln -s $(QFLOW_REPLACE_PATH) RePlAce) ;\
 	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f ntuplace3;  ln -s $(QFLOW_NTUPLACE3_PATH) ntuplace3) ;\
 	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f ntuplace4h;  ln -s $(QFLOW_NTUPLACE4_PATH) ntuplace4h) ;\
 	fi
-	@if test "${HAVE_QROUTER}" = "1"; then \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f qrouter;  ln -s $(QFLOW_QROUTER_PATH) qrouter) ;\
-	fi
-	@if test "${HAVE_MAGIC}" = "1"; then \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f magic;  ln -s $(QFLOW_MAGIC_PATH) magic) ;\
-	fi
-	@if test "${HAVE_NETGEN}" = "1"; then \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f netgen;  ln -s $(QFLOW_NETGEN_PATH) netgen); \
-	fi
-	@if test "${HAVE_YOSYS}" = "1"; then \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f yosys;  ln -s $(QFLOW_YOSYS_PATH) yosys); \
-	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f yosys-abc;  ln -s $(QFLOW_YOSYS_PATH)-abc yosys-abc); \
-	fi
+	# @if test "${HAVE_QROUTER}" = "1"; then \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f qrouter;  ln -s $(QFLOW_QROUTER_PATH) qrouter) ;\
+	# fi
+	# @if test "${HAVE_MAGIC}" = "1"; then \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f magic;  ln -s $(QFLOW_MAGIC_PATH) magic) ;\
+	# fi
+	# @if test "${HAVE_NETGEN}" = "1"; then \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f netgen;  ln -s $(QFLOW_NETGEN_PATH) netgen); \
+	# fi
+	# @if test "${HAVE_YOSYS}" = "1"; then \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f yosys;  ln -s $(QFLOW_YOSYS_PATH) yosys); \
+	# (cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f yosys-abc;  ln -s $(QFLOW_YOSYS_PATH)-abc yosys-abc); \
+	# fi
 	@if test "${HAVE_OPENTIMER}" = "1"; then \
 	(cd $(DESTDIR)${INSTALL_BININSTALL};  $(RM) -f ot-shell;  ln -s $(QFLOW_OPENTIMER_PATH) ot-shell); \
 	fi
