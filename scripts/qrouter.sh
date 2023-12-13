@@ -182,7 +182,7 @@ cd ${layoutdir}
 # Determine the version number and availability of scripting
 #------------------------------------------------------------------
 
-set version=`${bindir}/qrouter -v 0 -h | tail -1`
+set version=`qrouter -v 0 -h | tail -1`
 set major=`echo $version | cut -d. -f1`
 set minor=`echo $version | cut -d. -f2`
 set subv=`echo $version | cut -d. -f3`
@@ -216,7 +216,7 @@ if (${scripting} == "T") then
 
    echo "Running qrouter $version"
    echo "qrouter ${qrouter_options} -s ${rootname}.cfg" |& tee -a ${synthlog} 
-   ${bindir}/qrouter ${qrouter_options} -s ${rootname}.cfg \
+   qrouter ${qrouter_options} -s ${rootname}.cfg \
 		|& tee -a ${synthlog} | \
 		grep - -e Failed\ net -e fail -e Progress -e remaining.\*00\$ \
 		-e remaining:\ \[1-9\]0\\\?\$ -e \\\*\\\*\\\*
@@ -231,7 +231,7 @@ else
    echo "Running qrouter $version"
    echo "qrouter -c ${rootname}.cfg -p ${vddnet} -g ${gndnet} -d '${rootname}_route.rc' ${qrouter_options} ${rootname}" \
 		 |& tee -a ${synthlog}
-   ${bindir}/qrouter -c ${rootname}.cfg -p ${vddnet} -g ${gndnet} \
+   qrouter -c ${rootname}.cfg -p ${vddnet} -g ${gndnet} \
 		-d "${rootname}_route.rc" ${qrouter_options} ${rootname} \
 		|& tee -a ${synthlog} | \
 		grep - -e Failed\ net -e fail -e Progress -e remaining.\*00\$ \

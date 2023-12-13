@@ -152,7 +152,7 @@ echo netgen ${lvs_options} -batch lvs \"${rootname}.spice ${rootname}\" \
 	\"${synthdir}/${rootname}.spc ${rootname}\" ${setup_script} ${outfile} \
 	-json -blackbox |& tee -a ${synthlog} 
 
-${bindir}/netgen ${lvs_options} -batch lvs "${rootname}.spice ${rootname}" \
+netgen ${lvs_options} -batch lvs "${rootname}.spice ${rootname}" \
 	"${synthdir}/${rootname}.spc ${rootname}" ${setup_script} ${outfile} \
 	-json -blackbox |& tee -a ${synthlog}
 

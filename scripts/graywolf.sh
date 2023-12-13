@@ -190,7 +190,7 @@ cd ${layoutdir}
 # in qrouter.
 #------------------------------------------------------------------
 
-set version=`${bindir}/qrouter -v 0 -h | tail -1`
+set version=`qrouter -v 0 -h | tail -1`
 set major=`echo $version | cut -d. -f1`
 set minor=`echo $version | cut -d. -f2`
 set subv=`echo $version | cut -d. -f3`
@@ -212,7 +212,7 @@ else
    endif
 endif
 
-${bindir}/qrouter -i ${rootname}.info -c ${rootname}.cfg
+qrouter -i ${rootname}.info -c ${rootname}.cfg
 
 #---------------------------------------------------------------------
 # Spot check:  Did qrouter produce file ${rootname}.info?
@@ -446,7 +446,7 @@ endif
 
 echo "Running GrayWolf placement" |& tee -a ${synthlog}
 echo "graywolf ${graywolf_options} $rootname" |& tee -a ${synthlog}
-${bindir}/graywolf ${graywolf_options} $rootname >>& ${synthlog}
+graywolf ${graywolf_options} $rootname >>& ${synthlog}
 
 set errcond = $status
 if ( ${errcond} != 0 ) then

@@ -155,7 +155,7 @@ cd ${layoutdir}
 # Determine the version number and availability of scripting
 #------------------------------------------------------------------
 
-set version=`${bindir}/magic --version`
+set version=`magic --version`
 set major=`echo $version | cut -d. -f1`
 set minor=`echo $version | cut -d. -f2`
 set subv=`echo $version | cut -d. -f3`
@@ -286,7 +286,7 @@ EOF
 
 echo "Running magic $version"
 echo "magic -dnull -noconsole ${migrate_options} ${migratefile}" |& tee -a ${synthlog} 
-${bindir}/magic -dnull -noconsole ${migrate_options} ${migratefile} |& tee -a ${synthlog}
+magic -dnull -noconsole ${migrate_options} ${migratefile} |& tee -a ${synthlog}
 
 set errcond = $status
 if ( ${errcond} != 0 ) then

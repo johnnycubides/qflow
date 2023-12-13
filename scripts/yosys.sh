@@ -135,7 +135,7 @@ foreach f (${leffile})
 end
 
 # Determine version of yosys
-set versionstring = `${bindir}/yosys -V | cut -d' ' -f2`
+set versionstring = `yosys -V | cut -d' ' -f2`
 #set major = `echo $versionstring | cut -d. -f1`
 set major = 0
 set minor = `echo $versionstring | cut -d. -f2`
@@ -241,14 +241,14 @@ hierarchy -check
 EOF
 
    # Note:  Remove backslashes and brackets to avoid problems with tcsh
-   set yerrors = `eval ${bindir}/yosys -s ${modulename}.ys |& sed -e "/\\/s#\\#/#g" \
+   set yerrors = `eval yosys -s ${modulename}.ys |& sed -e "/\\/s#\\#/#g" \
 		-e "/\[/s/\[//g" -e "/\]/s/\]//g" | grep ERROR | \
 		sed 's/^.*\(ERROR.*\).*$/\1/'`
    set yerrcnt = `echo $yerrors | wc -c`
 
    if ($yerrcnt > 1) then
       # NOTE: Do not pass yosys stdout but look only at stderr! 
-      ( ${bindir}/yosys -s ${modulename}.ys > /dev/null ) >& ${synthlog}
+      ( yosys -s ${modulename}.ys > /dev/null ) >& ${synthlog}
       echo "Errors detected in verilog source, need to be corrected." \
 		|& tee -a ${synthlog}
       echo "See file ${synthlog} for error output."
@@ -377,7 +377,7 @@ hierarchy -check
 EOF
 
    # Note:  Remove backslashes and brackets to avoid problems with tcsh
-   set yerrors = `eval ${bindir}/yosys -s ${modulename}.ys |& sed -e "/\\/s#\\#/#g" \
+   set yerrors = `eval yosys -s ${modulename}.ys |& sed -e "/\\/s#\\#/#g" \
 		-e "/\[/s/\[//g" -e "/\]/s/\]//g" | grep ERROR | \
 		sed 's/^.*\(ERROR.*\).*$/\1/'`
    set yerrcnt = `echo $yerrors | wc -c`
@@ -391,7 +391,7 @@ EOF
          set uniquedeplist = "${uniquedeplist} ${newdep}"
       else
          # NOTE: Do not pass yosys stdout but look only at stderr! 
-         ( ${bindir}/yosys -s ${modulename}.ys > /dev/null ) >& ${synthlog}
+         ( yosys -s ${modulename}.ys > /dev/null ) >& ${synthlog}
          echo "Errors detected in verilog source, need to be corrected." \
 		|& tee -a ${synthlog}
          echo "See file ${synthlog} for error output."
@@ -522,7 +522,7 @@ EOF
 if ( ${?abc_script} ) then
    if ( ${abc_script} != "" ) then
       cat >> ${modulename}.ys << EOF
-abc -exe ${bindir}/yosys-abc -liberty ${libertypath} -script ${abc_script}
+abc -exe yosys-abc -liberty ${libertypath} -script ${abc_script}
 flatten
 setundef -zero
 
@@ -531,7 +531,7 @@ EOF
       echo "Warning: no abc script ${abc_script}, using default, no script" \
 		|& tee -a ${synthlog}
       cat >> ${modulename}.ys << EOF
-abc -exe ${bindir}/yosys-abc -liberty ${libertypath}
+abc -exe yosys-abc -liberty ${libertypath}
 flatten
 setundef -zero
 
@@ -540,7 +540,7 @@ EOF
 else
    cat >> ${modulename}.ys << EOF
 # Map combinatorial cells, standard script
-abc -exe ${bindir}/yosys-abc -liberty ${libertypath} -script +strash;scorr;ifraig;retime,{D};strash;dch,-f;map,-M,1,{D}
+abc -exe yosys-abc -liberty ${libertypath} -script +strash;scorr;ifraig;retime,{D};strash;dch,-f;map,-M,1,{D}
 flatten
 setundef -zero
 
@@ -608,10 +608,10 @@ echo "Running yosys for verilog parsing and synthesis" |& tee -a ${synthlog}
 # If provided own script yosys call that, otherwise call yosys with generated script.
 if ( ${usescript} == 1 ) then
    echo "yosys ${yosys_options}" |& tee -a ${synthlog}
-   eval ${bindir}/yosys ${yosys_options} |& tee -a ${synthlog}
+   eval yosys ${yosys_options} |& tee -a ${synthlog}
 else
    echo "yosys ${yosys_options} -s ${modulename}.ys" |& tee -a ${synthlog}
-   eval ${bindir}/yosys ${yosys_options} -s ${modulename}.ys |& tee -a ${synthlog}
+   eval yosys ${yosys_options} -s ${modulename}.ys |& tee -a ${synthlog}
 endif
 
 #---------------------------------------------------------------------

@@ -272,7 +272,7 @@ set magicxr=0
 set magicx11=0
 
 if ( ! $?magic_display ) then
-  ${bindir}/magic -noconsole -d <<EOF >& .magic_displays
+  magic -noconsole -d <<EOF >& .magic_displays
 exit
 EOF
 
@@ -284,7 +284,7 @@ endif
 
 # Get the version of magic
 
-${bindir}/magic -noconsole --version <<EOF >& .magic_version
+magic -noconsole --version <<EOF >& .magic_version
 exit
 EOF
 
@@ -305,11 +305,11 @@ endif
 # exits when the user exits magic.
 
 if ( $?magic_display ) then
-   ${bindir}/magic -d ${magic_display} ${dispfile}
+   magic -d ${magic_display} ${dispfile}
 else if ( ${magicxr} >= 1 ) then
-   ${bindir}/magic -d XR ${dispfile}
+   magic -d XR ${dispfile}
 else if ( ${magicx11} >= 1) then
-   ${bindir}/magic -d X11 ${dispfile}
+   magic -d X11 ${dispfile}
 else
    echo "Magic does not support Cairo or X11 graphics on this host."
 endif
